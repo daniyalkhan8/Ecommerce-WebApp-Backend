@@ -19,8 +19,8 @@ app.use(fileUpload({
 
 // Routes
 app.use('/api/users', require('./routes/userRoute'));
-app.use('/api/sellers', require('./routes/sellerRoute'));
-app.use('/api/products', require('./routes/productRoute'));
+app.use('/api/seller', require('./routes/sellerRoute'));
+app.use('/api/seller/products', require('./routes/sellerProductRoute'));
 app.use(errorHandler);
 
 app.listen(port, () => {

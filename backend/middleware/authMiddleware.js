@@ -53,7 +53,6 @@ const verifySellerJWT = asyncHandler(async (req, res, next) => {
             throw new Error('Not authorized, no token found.');
         }
     } catch (error) {
-        console.log(error);
         res.status(500);
         throw new Error('Internal Server Error Occured.');
     }
