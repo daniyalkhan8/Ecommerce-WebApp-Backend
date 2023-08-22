@@ -81,41 +81,132 @@ const getProducts = asyncHandler(async (req, res) => {
 // /api/seller/products/update-product
 // Async function to update a selected product
 const updateProduct = asyncHandler(async (req, res) => {
+    // Declaring an empty object that will contain all the fields to be updated.
     let productUpdation = {}
 
+    // Validating if the seller id exist
     if (!req.seller) {
         res.status(401);
         throw new Error('Unauthorized Access');
     }
 
-    if (Object.keys(req.body).length === 0 && !req.files) {
-        res.status(400);
-        throw new Error("Please provide the fields that are to be updated.");
-    }
-
+    // Fetching product from req.params.id to check if it exist
     const verifyProduct = await Products.findById(req.params.id);
 
+    // Conditional to check if the product exist or not
     if (!verifyProduct) {
         res.status(400);
         throw new Error('Product not found');
     }
 
+    // Checking if the seller id provided by the authMiddleware and seller_id 
+    // of the fetched product is same or not
     if (verifyProduct.seller_id.toString() !== req.seller.id) {
         res.status(401);
         throw new Error('Unauthorized Access');
     }
 
+    // Checking if the keyword data exist in req.body and data contains some key value pairs
+    // and appending it to the the productUpdation empty object.
     if ('data' in req.body) {
         const parsedData = JSON.parse(req.body.data);
-        res.status(201).json({ parsedData });
-    } else {
-        res.status(400);
-        throw new Error('Unacceptable keyword given');
+        if (Object.keys(parsedData).length > 0) {
+            productUpdation = { ...parsedData }
+        }
     }
 
-    if ('image' in req.files) {
-        
+    // Checking if the req.files is present and it contains image with 'image' key
+    if (req.files && 'image' in req.files) {
+        const image = req.files.image
+
+        // Deleting the old image first
+        await cloudinary.uploader.destroy(verifyProduct.image.public_id, {
+            folder: 'MERN-Ecommerce/Products'
+        }).catch((err) => {
+            res.status(500);
+            throw new Error(err.message);
+        });
+
+        // Then adding the new image
+        const result = await cloudinary.uploader.upload(image.tempFilePath, {
+            folder: 'MERN-Ecommerce/Products'
+        }).catch((err) => {
+            res.status(500);
+            throw new Error(err.message);
+        });
+
+        // Then appending the public_id and secure_url to the productUpdation empty object
+        productUpdation = {
+            ...productUpdation,
+            image: {
+                public_id: result.public_id,
+                url: result.secure_url
+            }
+        }
+    }
+
+    // Checking if the productUpdation object is null or not
+    // It will be null if the user hasn't provided both 'data' and 'image'
+    if (Object.keys(productUpdation).length === 0) {
+        res.status(400);
+        throw new Error('Please provide some fileds to be updated.');
+    }
+
+    // If productUpdation is not null then this line will execute. It will update the prodct
+    // by searching it with the product id provided in req.params.id
+    const updatedProduct = await Products.findByIdAndUpdate(
+        req.params.id,
+        productUpdation,
+        { new: true }
+    );
+
+    // If the product is updated successfully it will respond with updated product and if not
+    // then it will respond with status code 500.
+    if (updatedProduct) {
+        res.status(201).json({ updatedProduct });
+    } else {
+        res.status(500);
+        throw new Error('Internal Server Error');
     }
 });
 
-module.exports = { addProduct, getProducts, updateProduct }
+// DELETE
+// /api/seller/products/delete-product
+// Async function to delete a selected product
+const deleteProduct = asyncHandler(async (req, res) => {
+    // Validating if the seller id exist
+    if (!req.seller) {
+        res.status(401);
+        throw new Error('Unauthorized Access');
+    }
+
+    // Fetching product from req.params.id to check if it exist
+    const verifyProduct = await Products.findById(req.params.id);
+
+    // Conditional to check if the product exist or not
+    if (!verifyProduct) {
+        res.status(400);
+        throw new Error('Product not found');
+    }
+
+    // Checking if the seller id provided by the authMiddleware and seller_id 
+    // of the fetched product is same or not
+    if (verifyProduct.seller_id.toString() !== req.seller.id) {
+        res.status(401);
+        throw new Error('Unauthorized Access');
+    }
+
+    // Deleting the image of the product from the cloudinary
+    await cloudinary.uploader.destroy(verifyProduct.image.public_id, {
+        folder: 'MERN-Ecommerce/Products'
+    }).catch((err) => {
+        res.status(500);
+        throw new Error(err.message)
+    });
+
+    // Deleting the product from the database
+    const deletedProduct = await Products.findByIdAndDelete(req.params.id);
+    res.status(200).json({ id: req.params.id })
+});
+
+module.exports = { addProduct, getProducts, updateProduct, deleteProduct }
