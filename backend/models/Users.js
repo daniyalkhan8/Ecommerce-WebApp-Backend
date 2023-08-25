@@ -17,6 +17,24 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please add your firstname']
+    }, 
+    address: {
+        city: {
+            type: String, 
+            required: [true, 'Please add your city']
+        }, 
+        state: {
+            type: String, 
+            required: [true, 'Please add your state']
+        }, 
+        country: {
+            type: String, 
+            required: [true, 'Please add your country']
+        }, 
+        street: {
+            type: String, 
+            required: [true, 'Please add your street']
+        }
     },
     dateofbirth: {
         day: {
