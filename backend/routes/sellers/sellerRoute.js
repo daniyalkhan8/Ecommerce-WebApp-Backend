@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { sellerLogin, sellerRegister, sellerResetPass } = require('../controllers/sellerController');
-const { verifySellerJWT } = require('../middleware/authMiddleware');
+const { sellerLogin, sellerRegister, sellerResetPass } = require('../../controllers/sellers/sellerController');
+const { verifySellerJWT } = require('../../middleware/authMiddleware');
 
 router.post('/login', sellerLogin);
 router.post('/register', sellerRegister);

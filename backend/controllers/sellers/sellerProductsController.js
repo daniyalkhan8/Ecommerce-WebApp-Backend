@@ -7,7 +7,7 @@ const { cloudinary } = require('../config/cloudinary');
 // Async function to add a product of a seller
 const addProduct = asyncHandler(async (req, res) => {
     const parsedData = JSON.parse(req.body.data);
-    const { name, description, brand, price, quantity } = parsedData;
+    const { name, description, brand, price, quantity, category } = parsedData;
     const seller_id = req.seller.id;
     const image = req.files.image;
 
@@ -36,6 +36,7 @@ const addProduct = asyncHandler(async (req, res) => {
         brand: brand,
         price: parseFloat(price),
         quantity: parseInt(quantity),
+        category: category,
         image: {
             public_id: result.public_id,
             url: result.secure_url
