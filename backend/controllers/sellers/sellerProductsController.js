@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const Products = require('../models/Products');
-const { cloudinary } = require('../config/cloudinary');
+const Products = require('../../models/Products');
+const { cloudinary } = require('../../config/cloudinary');
 
 // POST
 // /api/seller/products/add-product
@@ -207,7 +207,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
     // Deleting the product from the database
     const deletedProduct = await Products.findByIdAndDelete(req.params.id);
-    res.status(200).json({ id: req.params.id })
+    res.status(200).json({ id: req.params.id });
 });
 
 module.exports = { addProduct, getProducts, updateProduct, deleteProduct }
