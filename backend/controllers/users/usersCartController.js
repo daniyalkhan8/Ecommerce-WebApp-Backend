@@ -21,7 +21,7 @@ const addToCart = asyncHandler(async (req, res) => {
     // if null then returning a bad request
     if (!quantity || parseInt(quantity) < 1) {
         res.status(400);
-        throw new Error('Please provide the quantity to be updated');
+        throw new Error('Please provide the quantity to be added');
     }
 
     // Checking if the product exist in database.
@@ -41,47 +41,52 @@ const addToCart = asyncHandler(async (req, res) => {
 
     if (verifyInCart) {
         const updatedQuantity = verifyInCart.quantity + parseInt(quantity);
+        // Checking that the the quantity for adding in cart is always lesser that the
+        // amount of stock available
         if (updatedQuantity > verifyProduct.quantity) {
             res.status(400).json({ message: "Not enough stock available." });
-        }
-        const updatedPrice = verifyInCart.price + (quantity * verifyInCart.prodPrice);
-        const cartUpdation = {
-            quantity: updatedQuantity,
-            price: updatedPrice
-        }
-
-        // Updating cart item
-        const updatedCart = await Cart.findByIdAndUpdate(
-            verifyInCart.id,
-            cartUpdation,
-            { new: true }
-        );
-
-        if (updatedCart) {
-            res.status(201).json({ updatedCart });
         } else {
-            res.status(500);
-            throw new Error('Internal Server Error');
+            const updatedPrice = verifyInCart.price + (quantity * verifyInCart.prodPrice);
+            const cartUpdation = {
+                quantity: updatedQuantity,
+                price: updatedPrice
+            }
+
+            // Updating cart item
+            const updatedCart = await Cart.findByIdAndUpdate(
+                verifyInCart.id,
+                cartUpdation,
+                { new: true }
+            );
+
+            if (updatedCart) {
+                res.status(201).json({ updatedCart });
+            } else {
+                res.status(500);
+                throw new Error('Internal Server Error');
+            }
         }
     } else if (!verifyInCart) {
+        // Checking that the the quantity for adding in cart is always lesser that the
+        // amount of stock available
         if (parseInt(quantity) > verifyProduct.quantity) {
             res.status(400).json({ message: "Not enough stock available." });
-        }
-
-        // Adding product to cart
-        const cartDoc = await Cart.create({
-            user: user,
-            product: product,
-            quantity: parseInt(quantity),
-            prodPrice: verifyProduct.price,
-            price: parseInt(quantity) * verifyProduct.price
-        });
-
-        if (cartDoc) {
-            res.status(200).json({ cartDoc });
         } else {
-            res.status(500);
-            throw new Error('Internal Server Error');
+            // Adding product to cart
+            const cartDoc = await Cart.create({
+                user: user,
+                product: product,
+                quantity: parseInt(quantity),
+                prodPrice: verifyProduct.price,
+                price: parseInt(quantity) * verifyProduct.price
+            });
+
+            if (cartDoc) {
+                res.status(200).json({ cartDoc });
+            } else {
+                res.status(500);
+                throw new Error('Internal Server Error');
+            }
         }
     } else {
         res.status(500);
@@ -129,21 +134,25 @@ const updateCartItemQuantity = asyncHandler(async (req, res) => {
     }
 
     const cartItem = req.params.id;
+    const user = req.user.id;
     const { quantity } = req.body;
 
-    // Checking if the quantity of the cart item to be updated is not null, 
-    // if null then returning a bad request
+    // Checking if the quantity of the cart item to be updated is not null and not less than 1, 
+    // if so then returning a bad request
     if (!quantity || parseInt(quantity) < 1) {
         res.status(400);
         throw new Error('Please provide the quantity to be updated');
     }
 
-    // Checking if the cart item exist
-    const verifyCartItem = await Cart.findById(cartItem).select('id product prodPrice');
+    // Checking if the cart item of the particular user exist
+    const verifyCartItem = await Cart.findOne({
+        _id: cartItem,
+        user: user
+    }).select('id product prodPrice');
 
     if (!verifyCartItem) {
-        res.status(400);
-        throw new Error('Cart item does not exist');
+        res.status(401);
+        throw new Error('Cart Item does not exist.');
     }
 
     // Fetching product quantity to compare it with the quantity user enters in cart
@@ -184,24 +193,29 @@ const removeCartItem = asyncHandler(async (req, res) => {
         throw new Error('Unauthorized access');
     }
 
+    const user = req.user.id;
+
     // Checking if the cart item exist
-    const verifyCartItem = await Cart.findById(cartItem).select('id');
+    const verifyCartItem = await Cart.findOne({
+        _id: cartItem,
+        user: user
+    }).select('id');
 
     if (!verifyCartItem) {
         res.status(400);
         throw new Error('Cart Item does not exist.');
-    }
-
-    // Removing the cart item from the database
-    const removeCartItem = await Cart.findByIdAndDelete(cartItem);
-
-    // If the Cart item is remove successfully then it will return the cart item id, 
-    // else it will throw internal server error
-    if (removeCartItem) {
-        res.status(200).json({ id: req.params.id });
     } else {
-        res.status(500);
-        throw new Error("Internal Server Error");
+        // Removing the cart item from the database
+        const removeCartItem = await Cart.findByIdAndDelete(cartItem);
+
+        // If the Cart item is remove successfully then it will return the cart item id, 
+        // else it will throw internal server error
+        if (removeCartItem) {
+            res.status(200).json({ id: req.params.id });
+        } else {
+            res.status(500);
+            throw new Error("Internal Server Error");
+        }
     }
 });
 
