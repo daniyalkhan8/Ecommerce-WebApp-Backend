@@ -19,7 +19,11 @@ app.use(fileUpload({
 
 // Routes
 app.use('/api/users', require('./routes/users/userRoute'));
-app.use('/api/users/products', [require('./routes/users/usersCartRoute'), require('./routes/users/usersProductsRoutes')]);
+app.use('/api/users/products', [
+    require('./routes/users/usersCartRoute'), 
+    require('./routes/users/usersProductsRoutes'), 
+    require('./routes/users/usersWishListRoutes')
+]);
 app.use('/api/seller', require('./routes/sellers/sellerRoute'));
 app.use('/api/seller/products', require('./routes/sellers/sellerProductRoute'));
 app.use(errorHandler);
