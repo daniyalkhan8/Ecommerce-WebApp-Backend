@@ -46,7 +46,7 @@ const addToCart = asyncHandler(async (req, res) => {
         if (updatedQuantity > verifyProduct.quantity) {
             res.status(400).json({ message: "Not enough stock available." });
         } else {
-            const updatedPrice = verifyInCart.price + (quantity * verifyInCart.prodPrice);
+            const updatedPrice = verifyInCart.price + (quantity * verifyProduct.price);
             const cartUpdation = {
                 quantity: updatedQuantity,
                 price: updatedPrice
@@ -77,7 +77,6 @@ const addToCart = asyncHandler(async (req, res) => {
                 user: user,
                 product: product,
                 quantity: parseInt(quantity),
-                prodPrice: verifyProduct.price,
                 price: parseInt(quantity) * verifyProduct.price
             });
 
@@ -155,10 +154,11 @@ const updateCartItemQuantity = asyncHandler(async (req, res) => {
         throw new Error('Cart Item does not exist.');
     }
 
-    // Fetching product quantity to compare it with the quantity user enters in cart
-    const productQuantity = await Product.findById(verifyCartItem.product).select('quantity');
+    // Fetching product quantity to comapre if the quantity in cart doesnot exceed the stock
+    // and price to update the price in cart based on the quantity to be updated in cart
+    const verifyProduct = await Product.findById(verifyCartItem.product).select('price quantity');
 
-    if (productQuantity.quantity < parseInt(quantity)) {
+    if (verifyProduct.quantity < parseInt(quantity)) {
         res.status(400).json({ message: "Not enough stock available." });
     } else {
         // Updating the cart item
@@ -166,7 +166,7 @@ const updateCartItemQuantity = asyncHandler(async (req, res) => {
             cartItem,
             {
                 quantity: parseInt(quantity),
-                price: parseInt(quantity) * verifyCartItem.prodPrice
+                price: parseInt(quantity) * verifyProduct.price
             },
             { new: true }
         );
