@@ -43,11 +43,11 @@ const sellerRegister = asyncHandler(async (req, res) => {
         throw new Error('Please enter all of the required fields');
     }
 
-    // Checking if the Seller with same email already exist
-    findSeller = await Sellers.findOne({ email: email });
+    // Checking if the Seller already exist
+    findSeller = await Sellers.find({});
     if (findSeller) {
         res.status(400);
-        throw new Error('Seller already exist. Try with another email address');
+        throw new Error('Seller already exist.');
     }
 
     // Hashing the Sellers password
