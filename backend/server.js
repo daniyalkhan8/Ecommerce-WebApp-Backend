@@ -26,7 +26,10 @@ app.use('/api/users/products', [
     require('./routes/users/userOrdersRoutes')
 ]);
 app.use('/api/seller', require('./routes/sellers/sellerRoute'));
-app.use('/api/seller/products', require('./routes/sellers/sellerProductRoute'));
+app.use('/api/seller/products', [
+    require('./routes/sellers/sellerProductRoute'),
+    require('./routes/sellers/sellerOrderRoute')
+]);
 app.use(errorHandler);
 
 app.listen(port, () => {
