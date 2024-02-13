@@ -18,7 +18,7 @@ const sellerLogin = asyncHandler(async (req, res) => {
     const verifySeller = await Sellers.findOne({ email: email });
     if (!verifySeller) {
         res.status(400);
-        throw new Error('Seller not registered, please create an account first.');
+        throw new Error('Invalid seller credentials.');
     } else if (await bcrypt.compare(password, verifySeller.password)) {
         res.status(201).json({
             firstname: verifySeller.firstname,
@@ -27,7 +27,7 @@ const sellerLogin = asyncHandler(async (req, res) => {
         });
     } else {
         res.status(400);
-        throw new Error('Invalid Credentials.')
+        throw new Error('Invalid seller Credentials.')
     }
 });
 
@@ -44,8 +44,8 @@ const sellerRegister = asyncHandler(async (req, res) => {
     }
 
     // Checking if the Seller already exist
-    findSeller = await Sellers.find({});
-    if (findSeller) {
+    const findSeller = await Sellers.find({});
+    if (findSeller.length > 0) {
         res.status(400);
         throw new Error('Seller already exist.');
     }
@@ -101,7 +101,7 @@ const sellerResetPass = asyncHandler(async (req, res) => {
     const verifySeller = await Sellers.findById(id).select('password');
     if (!verifySeller) {
         res.status(401);
-        throw new Error('Not Authorized');
+        throw new Error('Seller not found.');
     } else if (await bcrypt.compare(password, verifySeller.password)) {
         if (password !== newPassword) {
             // Hashing newPassword
