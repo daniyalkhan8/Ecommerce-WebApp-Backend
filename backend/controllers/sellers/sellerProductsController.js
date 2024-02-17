@@ -22,7 +22,7 @@ const addProduct = asyncHandler(async (req, res) => {
 
     // Uploading the product image to cloudinary
     const result = await cloudinary.uploader.upload(image.tempFilePath, {
-        folder: "MERN-Ecommerce/Products"
+        folder: "Ecommerce-Backend-WebApp/Products"
     }).catch((err) => {
         res.status(500);
         throw new Error(err.message);
@@ -122,7 +122,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
         // Deleting the old image first
         await cloudinary.uploader.destroy(verifyProduct.image.public_id, {
-            folder: 'MERN-Ecommerce/Products'
+            folder: 'Ecommerce-Backend-WebApp/Products'
         }).catch((err) => {
             res.status(500);
             throw new Error(err.message);
@@ -130,7 +130,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
         // Then adding the new image
         const result = await cloudinary.uploader.upload(image.tempFilePath, {
-            folder: 'MERN-Ecommerce/Products'
+            folder: 'Ecommerce-Backend-WebApp/Products'
         }).catch((err) => {
             res.status(500);
             throw new Error(err.message);
@@ -199,7 +199,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
     // Deleting the image of the product from the cloudinary
     await cloudinary.uploader.destroy(verifyProduct.image.public_id, {
-        folder: 'MERN-Ecommerce/Products'
+        folder: 'Ecommerce-Backend-WebApp/Products'
     }).catch((err) => {
         res.status(500);
         throw new Error(err.message)

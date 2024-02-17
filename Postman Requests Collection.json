@@ -1,0 +1,1077 @@
+{
+	"info": {
+		"_postman_id": "4a71eaa7-d12e-41de-8db0-033193d49a9e",
+		"name": "Ecommerce Backend WebApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19297766"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"haris@gmail.com\",\r\n    \"password\": \"0987654321\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\": \"Muhammad Haris\", \r\n    \"lastname\": \"Khan Durrani\", \r\n    \"email\": \"haris@gmail.com\",\r\n    \"password\": \"1234567890\", \r\n    \"dob\": \"12-08-2000\",\r\n    \"address\": {\r\n        \"city\": \"Karachi\", \r\n        \"state\": \"Sindh\", \r\n        \"country\": \"Pakistan\",\r\n        \"street\": \"Block 20 F.B Area\"\r\n    } \r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/users/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAxMzcwLCJleHAiOjE3MTAzOTMzNzB9.QnRyNyvue0UgGfisctxwWkiccrukZixWROzf_1cNQ38",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"1234567890\", \r\n    \"newPassword\": \"0987654321\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/users/resetpassword",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"resetpassword"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Get Products",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/getproducts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"getproducts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Add To Cart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"quantity\": \"1\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/addtocart/65cb0142b5239fe7c0a6aeb3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"addtocart",
+										"65cb0142b5239fe7c0a6aeb3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cart Items",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var template = `\r",
+											"<style type=\"text/css\">\r",
+											"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+											"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+											"    .tftable tr {background-color:#ffffff;}\r",
+											"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+											"    .tftable tr:hover {background-color:#e0ffff;}\r",
+											"</style>\r",
+											"\r",
+											"<table class=\"tftable\" border=\"1\">\r",
+											"    <tr>\r",
+											"        <th>ID</th>\r",
+											"        <th>User</th>\r",
+											"        <th>Product</th>\r",
+											"        <th>Quantity</th>\r",
+											"        <th>Price</th>\r",
+											"        <th>Version</th>\r",
+											"    </tr>\r",
+											"    \r",
+											"    {{#each response.cartItems}}\r",
+											"        <tr id=row_{{@key}}>\r",
+											"            <td>{{_id}}</td>\r",
+											"            <td>{{user}}</td>\r",
+											"            <td>{{product}}</td>\r",
+											"            <td>{{quantity}}</td>\r",
+											"            <td>{{price}}</td>\r",
+											"            <td>{{__v}}</td>\r",
+											"        </tr>\r",
+											"    {{/each}}\r",
+											"</table>\r",
+											"`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    return {response: pm.response.json()}\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/getcartitems",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"getcartitems"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Cart Item",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"quantity\": \"2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/updatecartitemquantity/65cb04aeb5239fe7c0a6aedb",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"updatecartitemquantity",
+										"65cb04aeb5239fe7c0a6aedb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Cart Items",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjUxYTU3YWM3NDlhMjZkODJjNTRhZjkzIiwiaWF0IjoxNzA2NjY5NTQwLCJleHAiOjE3MDkyNjE1NDB9.8ZVcAsUAAgcarH3JF9bnjx6UaPBiL6QQ-0g15mAtIVw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/removecartitem/65b8f0989e2a067da3d8ab51",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"removecartitem",
+										"65b8f0989e2a067da3d8ab51"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Wish List",
+					"item": [
+						{
+							"name": "Add to Wish List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/addtowishlist/65cb000cb5239fe7c0a6aea6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"addtowishlist",
+										"65cb000cb5239fe7c0a6aea6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Wish List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/getwishlist",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"getwishlist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove From Wish List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/removefromwishlist/65cb0246b5239fe7c0a6aebb",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"removefromwishlist",
+										"65cb0246b5239fe7c0a6aebb"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Place Order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cartItems\": [\r\n        \"65cb049ab5239fe7c0a6aed6\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/placeorder",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"placeorder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZmY3ZmI1MjM5ZmU3YzBhNmFlYTIiLCJpYXQiOjE3MDc4MzcwNTEsImV4cCI6MTcxMDQyOTA1MX0.hVjMOVjX_b4iNsZbPZ3_njiAB3YdqpgxMb8I-j9XuEM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/cancelorder/65cb0923b5239fe7c0a6af07",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"cancelorder",
+										"65cb0923b5239fe7c0a6af07"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Orders",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var template = `\r",
+											"<style type=\"text/css\">\r",
+											"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+											"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+											"    .tftable tr {background-color:#ffffff;}\r",
+											"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+											"    .tftable tr:hover {background-color:#e0ffff;}\r",
+											"</style>\r",
+											"\r",
+											"<table class=\"tftable\" border=\"1\">\r",
+											"    <tr>\r",
+											"        <th>User</th>\r",
+											"        <th>Total Price</th>\r",
+											"        <th>Status</th>\r",
+											"        <th>Created At</th>\r",
+											"        <th>Updated At</th>\r",
+											"    </tr>\r",
+											"    \r",
+											"    {{#each response.allOrders}}\r",
+											"        <tr id=row_{{@key}}>\r",
+											"            <td>{{user}}</td>\r",
+											"            <td>{{totalPrice}}</td>\r",
+											"            <td>{{status}}</td>\r",
+											"            <td>{{createdAt}}</td>\r",
+											"            <td>{{updatedAt}}</td>\r",
+											"        </tr>\r",
+											"    {{/each}}\r",
+											"</table>\r",
+											"`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    return { response: pm.response.json() }\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjVjYWZiMDBiNTIzOWZlN2MwYTZhZTkzIiwiaWF0IjoxNzA3ODAzMTM3LCJleHAiOjE3MTAzOTUxMzd9.p9qvEwtVYuHYElidbuKUV04Sb07Mgiv6Ell8HcGP93A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/users/products/getorders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"users",
+										"products",
+										"getorders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Seller",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"danzdurr@gmail.com\",\r\n    \"password\": \"1234356\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/seller/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZTIxZmIwOWNjYTFhZWY0Njk0ZWEiLCJpYXQiOjE3MDc3OTU2NDMsImV4cCI6MTcxMDM4NzY0M30.kvC1dtkW_uSLaiCFxVt6e_ruY1A4NszVs0euzavjrpk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"1234356\",\r\n    \"newPassword\": \"1234567890\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/seller/resetpassword",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"resetpassword"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\": \"Daniyal\",\r\n    \"lastname\": \"Durrani\",\r\n    \"email\": \"danzdurr@gmail.com\",\r\n    \"password\": \"1234356\",\r\n    \"dob\": \"12-08-2001\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/seller/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Add Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZmY3ZmI1MjM5ZmU3YzBhNmFlYTIiLCJpYXQiOjE3MDgxOTIyMjcsImV4cCI6MTcxMDc4NDIyN30.R6sgRz7hxtVrdza1teHMuLqLPIIl8lOcJ7CDGjM9asA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "data",
+											"value": "{\n    \"name\": \"HP Elitebook 840 G6\", \n    \"description\": \"HP EliteBook 840 G6:  14 business laptop  8th Gen Intel Core i5, up to 3.9GHz  SSD storage, snappy performance  Durable, secure design, built for pros!  Ideal for everyday business tasks, not for demanding graphics.\",\n    \"brand\": \"HP\",\n    \"price\": \"1999\",\n    \"category\": \"Electronics\",\n    \"quantity\": \"30\"\n}",
+											"contentType": "application/json",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/seller/products/add-product",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"products",
+										"add-product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZmY3ZmI1MjM5ZmU3YzBhNmFlYTIiLCJpYXQiOjE3MDc4MDI0OTUsImV4cCI6MTcxMDM5NDQ5NX0.YKH64qNGOMINYVEe8_ZNES2yfgef-FB47whX03gJ2ys",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n\"name\": \"Rolex Dual Display\", \n\"description\": \"Durable Rolex dual display watch.\"\n}",
+											"contentType": "application/json",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/seller/products/update-product/65d0f63e0514620d1e63493f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"products",
+										"update-product",
+										"65d0f63e0514620d1e63493f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZmY3ZmI1MjM5ZmU3YzBhNmFlYTIiLCJpYXQiOjE3MDc4MDI0OTUsImV4cCI6MTcxMDM5NDQ5NX0.YKH64qNGOMINYVEe8_ZNES2yfgef-FB47whX03gJ2ys",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/seller/products/delete-product/65d0f63e0514620d1e63493f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"products",
+										"delete-product",
+										"65d0f63e0514620d1e63493f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Products",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZmY3ZmI1MjM5ZmU3YzBhNmFlYTIiLCJpYXQiOjE3MDc4MzYxNzMsImV4cCI6MTcxMDQyODE3M30.Usuc9rTQLRmn7zr_txBndRlxUz0BwRsX8X1r5-USggo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/seller/products/get-products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"products",
+										"get-products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Get Orders",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZmY3ZmI1MjM5ZmU3YzBhNmFlYTIiLCJpYXQiOjE3MDc4MzYxNzMsImV4cCI6MTcxMDQyODE3M30.Usuc9rTQLRmn7zr_txBndRlxUz0BwRsX8X1r5-USggo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/seller/products/getorders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"products",
+										"getorders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order Status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWxsZXIiOiI2NWNhZmY3ZmI1MjM5ZmU3YzBhNmFlYTIiLCJpYXQiOjE3MDc4MzYxNzMsImV4cCI6MTcxMDQyODE3M30.Usuc9rTQLRmn7zr_txBndRlxUz0BwRsX8X1r5-USggo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orderStatus\": \"canceled\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/seller/products/updateorderstate/65cb0923b5239fe7c0a6af07",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"seller",
+										"products",
+										"updateorderstate",
+										"65cb0923b5239fe7c0a6af07"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
