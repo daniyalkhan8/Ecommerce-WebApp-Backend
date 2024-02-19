@@ -88,12 +88,13 @@ This project contains the complete backend for an E-commerce web application, bu
 | :-------- | :------- | :------------------------- |
 | `token` | `bearer` | **Required**. Seller JWT |
 | `image` | `file` | **Required**. Product image |
-| `name` | `string` | **Required**. Product name |
-| `description` | `string` | **Required**. Product description |
-| `brand` | `string` | **Required**. Product brand |
-| `price` | `string` | **Required**. Product price |
-| `category` | `string` | **Required**. Product category |
-| `quantity` | `string` | **Required**. Product available units |
+| `data` | `object` | **Required**. Product details object. |
+| `data.name` | `string` | **Required**. Product name |
+| `data.description` | `string` | **Required**. Product description |
+| `data.brand` | `string` | **Required**. Product brand |
+| `data.price` | `string` | **Required**. Product price |
+| `data.category` | `string` | **Required**. Product category |
+| `data.quantity` | `string` | **Required**. Product available units |
 
 #### Seller Update Product
 
@@ -105,12 +106,13 @@ This project contains the complete backend for an E-commerce web application, bu
 | :-------- | :------- | :------------------------- |
 | `token` | `bearer` | **Required**. Seller JWT |
 | `image` | `file` | Product image |
-| `name` | `string` | Product name |
-| `description` | `string` | Product description |
-| `brand` | `string` | Product brand |
-| `price` | `string` | Product price |
-| `category` | `string` | Product category |
-| `quantity` | `string` | Product available units |
+| `data` | `object` | Product details object |
+| `data.name` | `string` | Product name |
+| `data.description` | `string` | Product description |
+| `data.brand` | `string` | Product brand |
+| `data.price` | `string` | Product price |
+| `data.category` | `string` | Product category |
+| `data.quantity` | `string` | Product available units |
 
 #### Seller Delete Product
 
@@ -323,7 +325,7 @@ This project contains the complete backend for an E-commerce web application, bu
 
 [Click Here to Create A Cloudinary Account](https://cloudinary.com/users/register_free)
 
-After that create `Ecommerce-Backend-WebApp` folder and inside that folder create `Products` folder in cloudinary.
+After that create `Ecommerce-Backend-WebApp` folder in Cloudinary, and inside that folder create `Products` folder.
 
 #### Clone the project
 
@@ -334,7 +336,7 @@ After that create `Ecommerce-Backend-WebApp` folder and inside that folder creat
 #### Go to the project directory
 
 ```bash
-  cd my-project
+  cd Ecommerce-WebApp-Backend
 ```
 
 #### Install dependencies
@@ -369,3 +371,10 @@ Set the environment variables mentioned below in `.env` file present in project'
 #### Import The Postman Requests Collection
 
 In the project's root directory, there's a `Postman Request Collection` json file for you. Import it into Postman, and the request collection magically appears, saving you time—no need to create each request one by one. Simply go to your Postman home screen, click 'Import,' and easily drag-and-drop the file or select it from your device.
+
+
+## Author
+
+- Github [@daniyalkhan8](https://github.com/daniyalkhan8)
+
+- LinkedIn [@daniyalkhandurrani](linkedin.com/in/daniyalkhandurrani)
