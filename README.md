@@ -377,4 +377,4 @@ In the project's root directory, there's a `Postman Request Collection` json fil
 
 - Github [@daniyalkhan8](https://github.com/daniyalkhan8)
 
-- LinkedIn [@daniyalkhandurrani](linkedin.com/in/daniyalkhandurrani)
+- LinkedIn [@daniyalkhandurrani](https://linkedin.com/in/daniyalkhandurrani)
