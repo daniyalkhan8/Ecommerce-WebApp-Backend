@@ -39,6 +39,67 @@ This project contains the complete backend for an E-commerce web application, bu
     * Track and manage all user orders efficiently.
     * Update order statuses for transparency and control.
 
+## Run Locally
+
+#### Download and Install NodeJS
+
+[Click Here to Download NodeJS Installer](https://nodejs.org/en/download)
+
+#### Download and Install Postman
+
+[Click Here to Download Postman Installer](https://www.postman.com/downloads/)
+
+#### Create a Cloudinary Account
+
+[Click Here to Create A Cloudinary Account](https://cloudinary.com/users/register_free)
+
+After that create `Ecommerce-Backend-WebApp` folder in Cloudinary, and inside that folder create `Products` folder.
+
+#### Clone the project
+
+```bash
+  git clone https://github.com/daniyalkhan8/Ecommerce-WebApp-Backend.git
+```
+
+#### Go to the project directory
+
+```bash
+  cd Ecommerce-WebApp-Backend
+```
+
+#### Install dependencies
+
+```bash
+  npm i
+```
+
+#### Set Environment Variables
+
+Set the environment variables mentioned below in `.env` file present in project's root directory.
+
+`MONGO_URI` MongoDB connection string.
+
+`PORT` Port on which project will run.
+
+`CLOUD_NAME` Cloudinary cloud name.
+
+`API_KEY` Cloudinary API key.
+
+`API_SECERET` Cloudinary API seceret.
+
+`NODE_ENV` Either 'development' or 'production'.
+
+`JWT_SECERET` A unique JWT seceret.
+
+#### Start the server
+
+```bash
+  npm run start
+```
+#### Import The Postman Requests Collection
+
+In the project's root directory, there's a `Postman Request Collection` json file for you. Import it into Postman, and the request collection magically appears, saving you time—no need to create each request one by one. Simply go to your Postman home screen, click 'Import,' and easily drag-and-drop the file or select it from your device.
+
 ## API Reference
 
 #### Seller Login
@@ -310,67 +371,6 @@ This project contains the complete backend for an E-commerce web application, bu
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `token` | `bearer` | **Required**. User JWT |
-
-## Run Locally
-
-#### Download and Install NodeJS
-
-[Click Here to Download NodeJS Installer](https://nodejs.org/en/download)
-
-#### Download and Install Postman
-
-[Click Here to Download Postman Installer](https://www.postman.com/downloads/)
-
-#### Create a Cloudinary Account
-
-[Click Here to Create A Cloudinary Account](https://cloudinary.com/users/register_free)
-
-After that create `Ecommerce-Backend-WebApp` folder in Cloudinary, and inside that folder create `Products` folder.
-
-#### Clone the project
-
-```bash
-  git clone https://github.com/daniyalkhan8/Ecommerce-WebApp-Backend.git
-```
-
-#### Go to the project directory
-
-```bash
-  cd Ecommerce-WebApp-Backend
-```
-
-#### Install dependencies
-
-```bash
-  npm i
-```
-
-#### Set Environment Variables
-
-Set the environment variables mentioned below in `.env` file present in project's root directory.
-
-`MONGO_URI` MongoDB connection string.
-
-`PORT` Port on which project will run.
-
-`CLOUD_NAME` Cloudinary cloud name.
-
-`API_KEY` Cloudinary API key.
-
-`API_SECERET` Cloudinary API seceret.
-
-`NODE_ENV` Either 'development' or 'production'.
-
-`JWT_SECERET` A unique JWT seceret.
-
-#### Start the server
-
-```bash
-  npm run start
-```
-#### Import The Postman Requests Collection
-
-In the project's root directory, there's a `Postman Request Collection` json file for you. Import it into Postman, and the request collection magically appears, saving you time—no need to create each request one by one. Simply go to your Postman home screen, click 'Import,' and easily drag-and-drop the file or select it from your device.
 
 
 ## Author
